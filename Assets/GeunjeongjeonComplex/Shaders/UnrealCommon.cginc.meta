@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ea6605384c7949042acf48c54d7e0b0b
+ShaderIncludeImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271915
+  packageName: 'NHA - Gyeongbokgung Palace Vol.1: Geunjeongjeon Hall'
+  packageVersion: 1.0
+  assetPath: Assets/GeunjeongjeonComplex/Shaders/UnrealCommon.cginc
+  uploadId: 646939

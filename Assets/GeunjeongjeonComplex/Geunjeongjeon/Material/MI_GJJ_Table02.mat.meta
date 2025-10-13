@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: abc00000000001655052891964286176
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271915
+  packageName: 'NHA - Gyeongbokgung Palace Vol.1: Geunjeongjeon Hall'
+  packageVersion: 1.0
+  assetPath: Assets/GeunjeongjeonComplex/Geunjeongjeon/Material/MI_GJJ_Table02.mat
+  uploadId: 646939

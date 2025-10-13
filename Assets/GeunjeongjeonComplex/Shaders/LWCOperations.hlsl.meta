@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d575f7aca41c6c54282cc488a1282f4f
+ShaderIncludeImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271915
+  packageName: 'NHA - Gyeongbokgung Palace Vol.1: Geunjeongjeon Hall'
+  packageVersion: 1.0
+  assetPath: Assets/GeunjeongjeonComplex/Shaders/LWCOperations.hlsl
+  uploadId: 646939
