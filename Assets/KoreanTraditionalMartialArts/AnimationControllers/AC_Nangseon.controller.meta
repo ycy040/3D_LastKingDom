@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 70c517424c3bf4449beea7a8de2a63b7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282818
+  packageName: kcisa - Korean Traditional Martial Arts
+  packageVersion: 1.0
+  assetPath: Assets/KoreanTraditionalMartialArts/AnimationControllers/AC_Nangseon.controller
+  uploadId: 694673
