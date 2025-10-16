@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4d202e1b84320774084ab93eb6b2920f
+guid: 71a0c097329e8ba4d89beed88b0046bb
 PrefabImporter:
   externalObjects: {}
   userData: 
@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 246654
   packageName: Melee Weapons Pack 28+
   packageVersion: 1.0
-  assetPath: Assets/melee weapons/Prefabs/knife.prefab
+  assetPath: Assets/melee weapons/Prefabs/sword4.prefab
   uploadId: 574764

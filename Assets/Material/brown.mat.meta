@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 4d202e1b84320774084ab93eb6b2920f
-PrefabImporter:
+guid: fc5c13ec9786bde42bf44e29bfd4ddb0
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,5 +11,5 @@ AssetOrigin:
   productId: 246654
   packageName: Melee Weapons Pack 28+
   packageVersion: 1.0
-  assetPath: Assets/melee weapons/Prefabs/knife.prefab
+  assetPath: Assets/melee weapons/Material/brown.mat
   uploadId: 574764
