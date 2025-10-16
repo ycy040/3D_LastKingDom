@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: acc03ee659e95554283d53839265caa8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282818
+  packageName: kcisa - Korean Traditional Martial Arts
+  packageVersion: 1.0
+  assetPath: Assets/KoreanTraditionalMartialArts/Animations/Gonbang/Anim_Gonbang_Damage_Solider.anim
+  uploadId: 694673

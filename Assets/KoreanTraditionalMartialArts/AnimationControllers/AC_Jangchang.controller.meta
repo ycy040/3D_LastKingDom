@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ab0ae5cdeb49d334a9fb298b431c7ddd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282818
+  packageName: kcisa - Korean Traditional Martial Arts
+  packageVersion: 1.0
+  assetPath: Assets/KoreanTraditionalMartialArts/AnimationControllers/AC_Jangchang.controller
+  uploadId: 694673
