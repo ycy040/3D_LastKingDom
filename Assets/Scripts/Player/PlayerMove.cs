@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float runSpeed = 8f;
+    [SerializeField] private float walkSpeed = 3f;
+    [SerializeField] private float runSpeed = 7f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = 9.81f;
     [SerializeField] private Transform cameraTransform; // 카메라 연결 필수
@@ -13,10 +13,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float eyeHeight = 1.65f;
 
     [Header("Head Bob Settings")]
-    [SerializeField] private float walkBobAmount = 0.004f;
-    [SerializeField] private float walkBobSpeed = 5f;
-    [SerializeField] private float runBobAmount = 0.004f;
-    [SerializeField] private float runBobSpeed = 10f;
+    // [SerializeField] private float walkBobAmount = 0.004f;
+    // [SerializeField] private float walkBobSpeed = 5f;
+    // [SerializeField] private float runBobAmount = 0.004f;
+    // [SerializeField] private float runBobSpeed = 10f;
 
     private Rigidbody rb;
     private Vector3 moveDir;
@@ -94,10 +94,10 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Head Bob 처리
-        HandleHeadBob(speed);
+       //  HandleHeadBob(speed);
     }
 
-    void HandleHeadBob(float speed)
+    /*void HandleHeadBob(float speed)
     {
         if (moveDir.magnitude > 0.1f && isGrounded)
         {
@@ -116,5 +116,5 @@ public class PlayerMove : MonoBehaviour
             localPos.y = eyeHeight;
             cameraHolder.localPosition = localPos;
         }
-    }
+    }*/
 }

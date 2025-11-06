@@ -10,9 +10,10 @@ public class PlayerTrackingCamera : MonoBehaviour
     public float pitchMax = 60f;
     public float mouseSensitivity = 5f;
     public float cameraSmoothTime = 0.15f;
-    public float zoomSpeed = 2f;
-    public float minZoom = 0.1f; // 1인칭에 맞춤
-    public float maxZoom = 5f;
+    //public float zoomSpeed = 2f;
+    //public float minZoom = 0.1f; // 1인칭에 맞춤
+    //public float maxZoom = 5f;
+    public float fixZoom = 0.1f;
 
     private float yaw = 0f;
     private float pitch = 0f;
@@ -33,7 +34,7 @@ public class PlayerTrackingCamera : MonoBehaviour
         yaw = angles.y;
         pitch = angles.x;
 
-        currentZoom = minZoom; // 초기 카메라 거리
+        // currentZoom = minZoom; // 초기 카메라 거리
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -42,7 +43,7 @@ public class PlayerTrackingCamera : MonoBehaviour
     void Update()
     {
         HandleCameraRotation();
-        HandleZoom();
+        //HandleZoom();
         HandleMovementInput();
     }
 
@@ -61,19 +62,19 @@ public class PlayerTrackingCamera : MonoBehaviour
         pitch = Mathf.Clamp(pitch, pitchMin, pitchMax);
     }
 
-    void HandleZoom()
+    /*void HandleZoom()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         currentZoom -= scroll * zoomSpeed;
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
-    }
+    }*/
 
     void HandleCameraPosition()
     {
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0f);
 
         Vector3 eyePosition = playerTransform.position + Vector3.up * eyeHeight;
-        Vector3 offsetDir = rotation * Vector3.forward * -currentZoom;
+        Vector3 offsetDir = rotation * Vector3.forward * -fixZoom;
         Vector3 desiredPosition = eyePosition + offsetDir;
 
         cameraTransform.position = Vector3.SmoothDamp(
