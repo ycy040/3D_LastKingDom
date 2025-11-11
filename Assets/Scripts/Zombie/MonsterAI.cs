@@ -1,15 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MonsterAI : MonoBehaviour
 {
     public Transform player;
-    public float followRange = 10f;   // ÃßÀû ½ÃÀÛ °Å¸®
-    public float attackRange = 1.5f;    // °ø°İ ½ÃÀÛ °Å¸®
+    public float followRange = 10f;   // ì¶”ì  ì‹œì‘ ê±°ë¦¬
+    public float attackRange = 1.5f;    // ê³µê²© ì‹œì‘ ê±°ë¦¬
     public float speed = 5f;
+    public float attackDamage = 10f;
+    public float attackCooldown = 1.5f; // ê³µê²© ê°„ê²©
 
     private Animator anim;
     private Rigidbody rb;
+    private float lastAttackTime = 0f;
 
     private enum State
     {
@@ -24,13 +27,13 @@ public class MonsterAI : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         if (anim == null)
-            Debug.LogError("Animator°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            Debug.LogError("Animatorê°€ ì—°ê²°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
 
         rb = GetComponent<Rigidbody>();
         if (rb == null)
-            Debug.LogError("Rigidbody°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            Debug.LogError("Rigidbodyê°€ ì—°ê²°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
 
-        // ¾ÕÀ¸·Î ¾²·¯ÁöÁö ¾Ê°Ô È¸Àü °íÁ¤
+        // ì•ìœ¼ë¡œ ì“°ëŸ¬ì§€ì§€ ì•Šê²Œ íšŒì „ ê³ ì •
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
@@ -38,7 +41,7 @@ public class MonsterAI : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // »óÅÂ °áÁ¤
+        // ìƒíƒœ ê²°ì •
         if (distance <= attackRange)
             currentState = State.Attack;
         else if (distance <= followRange)
@@ -46,7 +49,7 @@ public class MonsterAI : MonoBehaviour
         else
             currentState = State.Idle;
 
-        // »óÅÂ¿¡ µû¸¥ Çàµ¿
+        // ìƒíƒœì— ë”°ë¥¸ í–‰ë™
         switch (currentState)
         {
             case State.Idle:
@@ -60,22 +63,51 @@ public class MonsterAI : MonoBehaviour
 
             case State.Attack:
                 anim.Play("Z_Attack");
+                TryAttack();
                 break;
         }
     }
 
     void MoveTowardsPlayer()
     {
-        // ¹æÇâ °è»ê
+        // ë°©í–¥ ê³„ì‚°
         Vector3 dir = (player.position - transform.position);
         dir.y = 0f;
         dir.Normalize();
 
-        // Rigidbody ÀÌµ¿
+        // Rigidbody ì´ë™
         rb.MovePosition(rb.position + dir * speed * Time.fixedDeltaTime);
 
-        // yÃà È¸Àü¸¸ Àû¿ë
+        // yì¶• íšŒì „ë§Œ ì ìš©
         Quaternion lookRot = Quaternion.LookRotation(dir);
         rb.MoveRotation(lookRot);
+    }
+
+    void TryAttack()
+    {
+        if (Time.time - lastAttackTime >= attackCooldown)
+        {
+            lastAttackTime = Time.time;
+            Attack();
+        }
+    }
+
+    void Attack()
+    {
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (distance <= attackRange)
+        {
+            // í”Œë ˆì´ì–´ì—ê²Œ ë°ë¯¸ì§€ ì „ë‹¬
+            IDamageable damageable = player.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                // í”¼ê²© ìœ„ì¹˜ì™€ ë°©í–¥ ê³„ì‚° (ì˜ˆ: ì¶©ëŒ ì§€ì ì´ ì—†ìœ¼ë¯€ë¡œ ëŒ€ëµì ìœ¼ë¡œ)
+                Vector3 hitPoint = player.position + Vector3.up * 1f;
+                Vector3 hitNormal = (player.position - transform.position).normalized;
+
+                damageable.OnDamage(attackDamage, hitPoint, hitNormal);
+                Debug.Log("í”Œë ˆì´ì–´ì—ê²Œ " + attackDamage + " í”¼í•´ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤!");
+            }
+        }
     }
 }
