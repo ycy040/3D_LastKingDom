@@ -489,7 +489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &393191390
 RectTransform:
   m_ObjectHideFlags: 0
@@ -995,11 +995,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3427f04bbecf8974d86c58346a55baef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  gameoverText: {fileID: 393191389}
-  healthText: {fileID: 1156035743}
-  healthSlider: {fileID: 1249601806}
-  player: {fileID: 971926129}
-  isGameover: 0
+  maxRespawnCount: 3
+  maxHP: 100
 --- !u!1 &1156035741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1364,7 @@ GameObject:
   - component: {fileID: 1563463137}
   - component: {fileID: 1563463136}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Zombie1Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
