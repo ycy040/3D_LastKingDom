@@ -9,26 +9,90 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
+        // GameManager가 있으면 GameManager의 HP를 사용
+        if (GameManager.Instance != null)
+        {
+            maxHealth = GameManager.Instance.GetMaxHP();
+            currentHealth = GameManager.Instance.GetCurrentHP();
+        }
+        else
+        {
+            currentHealth = maxHealth;
+        }
+
         if (healthBar != null)
+        {
             healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+    }
+
+    void Update()
+    {
+        // GameManager와 HP 동기화
+        if (GameManager.Instance != null)
+        {
+            currentHealth = GameManager.Instance.GetCurrentHP();
+
+            if (healthBar != null)
+            {
+                healthBar.value = currentHealth;
+            }
+        }
     }
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        // GameManager를 통해 데미지 처리
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TakeDamage(damage);
+        }
+        else
+        {
+            // GameManager가 없으면 직접 처리
+            currentHealth -= damage;
+            currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-        if (healthBar != null)
-            healthBar.value = currentHealth;
+            if (healthBar != null)
+                healthBar.value = currentHealth;
 
-        if (currentHealth <= 0f)
-            Die();
+            if (currentHealth <= 0f)
+                Die();
+        }
+    }
+
+    public void Heal(float amount)
+    {
+        // GameManager를 통해 회복 처리
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.Heal(amount);
+        }
+        else
+        {
+            // GameManager가 없으면 직접 처리
+            currentHealth += amount;
+            currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+            if (healthBar != null)
+                healthBar.value = currentHealth;
+        }
     }
 
     void Die()
     {
         Debug.Log("플레이어가 사망했습니다.");
-        // 여기서 사망 애니메이션이나 리스폰, 게임오버 처리 가능
+
+        // GameManager를 통해 사망 처리 (리스폰 시스템)
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.PlayerDied();
+        }
+        else
+        {
+            // GameManager가 없으면 오브젝트 비활성화
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -3,6 +3,21 @@ using UnityEngine;
 
 public class Player : LivingEntity
 {
+    private static Player instance; // 중복 방지용
+
+    private void Awake()
+    {
+        // 중복된 플레이어가 있으면 자기 자신 삭제
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 유지
+    }
+
     public override void Die()
     {
         base.Die();

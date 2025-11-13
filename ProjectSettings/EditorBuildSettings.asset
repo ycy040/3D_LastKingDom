@@ -5,9 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/3D_LastKingdom1.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/3D_LastKingdom.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    guid: 7d2ba2159673a9f4296865ca0a43c9b4
+  - enabled: 1
+    path: Assets/Scenes/3D_LastKingdom2.unity
+    guid: 84f53d0c2decc2e49bcdc165c34178be
+  - enabled: 1
+    path: Assets/Scenes/3D_LastKingdom3.unity
+    guid: 946c3e0d3c1c2f5459b2dc197c950872
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
