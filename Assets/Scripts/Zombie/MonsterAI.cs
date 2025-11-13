@@ -10,18 +10,18 @@ public class MonsterAI : MonoBehaviour
     public float attackDamage = 10f;
     public float attackCooldown = 1.5f; // 공격 간격
 
-    private Animator anim;
-    private Rigidbody rb;
-    private float lastAttackTime = 0f;
+    public Animator anim;
+    public Rigidbody rb;
+    public float lastAttackTime = 0f;
 
-    private enum State
+    public enum State
     {
         Idle,
         Follow,
         Attack
     }
 
-    private State currentState = State.Idle;
+    public State currentState = State.Idle;
 
     void Start()
     {
