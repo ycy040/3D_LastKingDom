@@ -3,31 +3,56 @@ using UnityEngine;
 
 public class Player : LivingEntity
 {
-    private static Player instance; // 중복 방지용
+    private static Player instance;
 
     private void Awake()
     {
-        // 중복된 플레이어가 있으면 자기 자신 삭제
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        // 싱글톤은 GameManager에서 관리하므로 제거
+        // 씬마다 플레이어가 있으므로 DontDestroyOnLoad 제거
+    }
 
-        instance = this;
-        DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 유지
+    void Start()
+    {
+        // GameManager와 HP 동기화
+        if (GameManager.Instance != null)
+        {
+            health = GameManager.Instance.GetCurrentHP();
+            startingHealth = GameManager.Instance.GetMaxHP();
+        }
+    }
+
+    void Update()
+    {
+        // 부모 클래스의 Update 호출 (GameManager 동기화)
+        base.Update();
     }
 
     public override void Die()
     {
+        if (dead) return; // 중복 사망 방지
+
         base.Die();
-        Debug.Log("플레이어 사망 처리 (예: GameOver UI)");
-        // 사망 애니메이션, 게임오버 UI 띄우기 등
+        Debug.Log("플레이어 사망 처리");
+
+        // GameManager를 통해 사망 처리
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.PlayerDied();
+        }
     }
 
     public override void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
     {
-        base.OnDamage(damage, hitPoint, hitNormal);
-        Debug.Log("플레이어가 피해를 받음. 현재 체력: " + health);
+        // GameManager를 통해 데미지 처리
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TakeDamage(damage);
+        }
+        else
+        {
+            base.OnDamage(damage, hitPoint, hitNormal);
+        }
+
+        Debug.Log("플레이어가 데미지를 받음. 현재 체력: " + health);
     }
 }

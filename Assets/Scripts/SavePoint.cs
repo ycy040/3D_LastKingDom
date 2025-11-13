@@ -14,9 +14,6 @@ public class SavePoint : MonoBehaviour
     [Header("회복 설정")]
     public bool healOnSpawn = true; // 스폰 시 체력 회복 여부
 
-    [Header("리스폰 UI 설정 (선택)")]
-    public Text respawnCountText; // 리스폰 기회 표시 UI
-
     void Start()
     {
         // GameManager에 이 SavePoint의 위치를 등록
@@ -24,7 +21,6 @@ public class SavePoint : MonoBehaviour
         {
             GameManager.Instance.UpdateSavePoint(transform.position);
             Debug.Log($"SavePoint 등록 완료: {transform.position}");
-            UpdateRespawnUI();
         }
         else
         {
@@ -40,22 +36,6 @@ public class SavePoint : MonoBehaviour
         if (ambientParticle != null)
         {
             ambientParticle.Play();
-        }
-    }
-
-    void Update()
-    {
-        // 리스폰 기회 UI 업데이트
-        UpdateRespawnUI();
-    }
-
-    void UpdateRespawnUI()
-    {
-        if (respawnCountText != null && GameManager.Instance != null)
-        {
-            int current = GameManager.Instance.GetRespawnCount();
-            int max = GameManager.Instance.maxRespawnCount;
-            respawnCountText.text = $"남은 기회: {current}/{max}";
         }
     }
 
@@ -112,7 +92,7 @@ public class SavePoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log($"SavePoint 활성화! 이 위치에서 리스폰됩니다. (남은 기회: {GameManager.Instance.GetRespawnCount()})");
+            Debug.Log("SavePoint 활성화! 이 위치에서 리스폰됩니다.");
             // UI로 "체크포인트 도달!" 메시지 표시 가능
         }
     }

@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void Start()
     {
+        // GameManager에서 HP 가져오기
         if (GameManager.Instance != null)
         {
             maxHealth = GameManager.Instance.GetMaxHP();
@@ -28,23 +29,36 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     void Update()
     {
+        // GameManager와 항상 동기화
         if (GameManager.Instance != null)
         {
             currentHealth = GameManager.Instance.GetCurrentHP();
+            maxHealth = GameManager.Instance.GetMaxHP();
 
             if (healthBar != null)
+            {
+                healthBar.maxValue = maxHealth;
                 healthBar.value = currentHealth;
+            }
         }
+    }
+
+    // IDamageable 인터페이스 구현
+    public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
+    {
+        TakeDamage(damage);
     }
 
     public void TakeDamage(float damage)
     {
+        // GameManager를 통해서만 데미지 처리
         if (GameManager.Instance != null)
         {
             GameManager.Instance.TakeDamage(damage);
         }
         else
         {
+            // GameManager가 없으면 로컬 처리
             currentHealth -= damage;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
@@ -56,20 +70,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
-    // IDamageable 인터페이스 구현
-    public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
-    {
-        TakeDamage(damage); // 기존 로직 그대로 사용
-    }
-
     public void Heal(float amount)
     {
+        // GameManager를 통해서만 회복 처리
         if (GameManager.Instance != null)
         {
             GameManager.Instance.Heal(amount);
         }
         else
         {
+            // GameManager가 없으면 로컬 처리
             currentHealth += amount;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
@@ -83,8 +93,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         Debug.Log("플레이어가 사망했습니다.");
 
         if (GameManager.Instance != null)
+        {
             GameManager.Instance.PlayerDied();
+        }
         else
+        {
             gameObject.SetActive(false);
+        }
     }
 }
