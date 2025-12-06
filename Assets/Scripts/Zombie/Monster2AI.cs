@@ -7,11 +7,11 @@ public class Monster2AI : MonoBehaviour, IDamageable
     public float followRange = 10f;
     public float attackRange = 1.5f;
     public float speed = 5f;
-    public float attackDamage = 20f;
+    public float attackDamage = 10f;
     public float attackCooldown = 1.5f;
 
     [Header("HP Settings")]
-    public float maxHP = 100f;
+    public float maxHP = 80f;
     public float currentHP;
 
     public Animator anim;
@@ -31,6 +31,21 @@ public class Monster2AI : MonoBehaviour, IDamageable
 
     void Start()
     {
+
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+                Debug.Log("플레이어를 자동으로 찾았습니다!");
+            }
+            else
+            {
+                Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다!");
+            }
+        }
+
         anim = GetComponent<Animator>();
         if (anim == null)
             Debug.LogError("Animator가 연결되지 않았습니다!");
@@ -149,6 +164,7 @@ public class Monster2AI : MonoBehaviour, IDamageable
         Debug.Log("좀비가 사망했습니다!");
 
         // 일정 시간 후 오브젝트 제거
+        GameManager.Instance.AddDeadZombieCount();
         Destroy(gameObject, 3f);
     }
 }

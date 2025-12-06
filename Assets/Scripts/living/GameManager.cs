@@ -27,8 +27,18 @@ public class GameManager : MonoBehaviour
     public bool isRespawning = false; // 리스폰 중 여부
     public float respawnInvincibleTime = 2f; // 리스폰 후 무적 시간
 
+    [Header("킬 카운트")]
+    public int deadZombieCount = 0;
+    public TMP_Text deadZombieCountText;
+
+    [Header("페이즈")]
+    public int currentPhase = 0; // 0으로 시작
+    public TMP_Text currentPhaseText;
+
     // HP 변경 이벤트
     public event System.Action<float, float> onHealthChanged;
+
+    private bool isFirstLoad = true; // 첫 로드 여부 확인
 
     void Awake()
     {
@@ -45,11 +55,16 @@ public class GameManager : MonoBehaviour
 
         currentHP = maxHP;
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        currentPhase = 0; // 0으로 시작
     }
 
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
+        // 게임 시작 시 Phase 1로 설정
+        IncreasePhase();
+        
         InitializeScene();
         FindUIElements();
         UpdateUI();
@@ -74,12 +89,23 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // 첫 로드는 Start에서 이미 처리했으므로 건너뜀
+        if (isFirstLoad)
+        {
+            isFirstLoad = false;
+            return;
+        }
+
         currentSceneIndex = scene.buildIndex;
         currentHP = maxHP;
         isGameOver = false;
         Time.timeScale = 1f;
 
         Debug.Log($"새로운 씬 로드: {scene.name}, HP 전량 회복!");
+
+        // 새로운 씬으로 이동할 때만 Phase 증가
+        IncreasePhase();
+
         InitializeScene();
         FindUIElements();
         UpdateUI();
@@ -129,6 +155,39 @@ public class GameManager : MonoBehaviour
         {
             gameoverText.SetActive(false);
         }
+
+        if (deadZombieCountText == null)
+            deadZombieCountText = GameObject.Find("DeadZombieCountText")?.GetComponent<TMP_Text>();
+
+        if (currentPhaseText == null)
+            currentPhaseText = GameObject.Find("CurrentPhaseText")?.GetComponent<TMP_Text>();
+    }
+
+    public void AddDeadZombieCount()
+    {
+        deadZombieCount++;
+
+        Debug.Log($"좀비 카운트 증가! 현재: {deadZombieCount}");
+
+        if (deadZombieCountText != null)
+        {
+            deadZombieCountText.text = "죽은 좀비 횟수 : " + deadZombieCount;
+            Debug.Log("UI 텍스트 업데이트 성공!");
+        }
+        else
+        {
+            Debug.LogError("deadZombieCountText가 null입니다!");
+        }
+    }
+
+    void IncreasePhase()
+    {
+        currentPhase++;
+
+        if (currentPhaseText != null)
+            currentPhaseText.text = "현재 페이즈 : " + currentPhase;
+
+        Debug.Log("페이즈 증가! 현재 페이즈: " + currentPhase);
     }
 
     void MovePlayerToSavePoint()
@@ -262,7 +321,11 @@ public class GameManager : MonoBehaviour
             healthText.text = Mathf.CeilToInt(currentHP).ToString();
         }
 
-        // 리스폰 기회 텍스트 제거
+        if (currentPhaseText != null)
+            currentPhaseText.text = "현재 페이즈 : " + currentPhase;
+
+        if (deadZombieCountText != null)
+            deadZombieCountText.text = "죽인 좀비 횟수 : " + deadZombieCount;
     }
 
     // ========== 사망 처리 ==========
@@ -366,6 +429,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         currentHP = maxHP;
         isGameOver = false;
+        isFirstLoad = true; // 재시작 시 첫 로드로 다시 설정
 
         // PlayerUI를 통한 게임 오버 숨김
         if (playerUI != null)

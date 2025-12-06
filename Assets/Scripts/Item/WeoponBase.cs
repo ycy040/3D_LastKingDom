@@ -5,7 +5,7 @@ public abstract class WeaponBase : MonoBehaviour
 {
     [Header("Weapon Stats")]
     public float damage = 10f;
-    public float attackRange = 4f;
+    public float attackRange = 2f;
     public float attackCooldown = 0.5f;
 
     [Header("References")]
@@ -39,11 +39,6 @@ public abstract class WeaponBase : MonoBehaviour
 
     protected virtual void TryAttack()
     {
-        if (Time.time - lastAttackTime < attackCooldown)
-        {
-            Debug.Log("아직 공격할 수 없습니다!");
-            return;
-        }
 
         lastAttackTime = Time.time;
         Attack();
