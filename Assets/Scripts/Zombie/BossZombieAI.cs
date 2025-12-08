@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -13,6 +14,9 @@ public class BossZombieAI : MonoBehaviour, IDamageable
     [Header("HP Settings")]
     public float maxHP = 200f;
     public float currentHP;
+
+    [Header("Game Ending")]
+    public TMP_Text gameEndingText; // Text 컴포넌트 연결
 
     [Header("Boss HP Bar")]
     public BossHealthUI bossHealthUI;
@@ -168,6 +172,18 @@ public class BossZombieAI : MonoBehaviour, IDamageable
         {
             anim.Play("Z_FallingBack");
         }
+
+        // GameEnding 텍스트 표시
+        if (gameEndingText != null)
+        {
+            gameEndingText.enabled = true;
+            Debug.Log("GameEnding 텍스트 표시!");
+        }
+        else
+        {
+            Debug.LogWarning("GameEnding 텍스트가 연결되지 않았습니다!");
+        }
+
 
         // Rigidbody 비활성화
         rb.isKinematic = true;
