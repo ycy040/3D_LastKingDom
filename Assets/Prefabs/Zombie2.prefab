@@ -824,7 +824,7 @@ MonoBehaviour:
   followRange: 10
   attackRange: 1.5
   speed: 5
-  attackDamage: 20
+  attackDamage: 5
   attackCooldown: 1.5
   maxHP: 100
   currentHP: 0
