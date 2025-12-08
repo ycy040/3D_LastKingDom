@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6195161104061021034}
   - component: {fileID: 1369273645709118053}
   - component: {fileID: -3568835602624453208}
-  m_Layer: 0
+  - component: {fileID: -8265220511353674062}
+  - component: {fileID: 1616987239195497760}
+  m_Layer: 8
   m_Name: Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,3 +143,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8265220511353674062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303348358644969391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4eeddf0c7477a4bba59fbc6a31c958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpearWeapon
+  damage: 40
+  attackRange: 10
+  attackCooldown: 0.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 320
+  attackPoint: {fileID: 0}
+--- !u!114 &1616987239195497760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303348358644969391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35361d4c089a9614fb6d78ec77842efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponPickupData
+  equipPosition: {x: 0, y: 0, z: 0}
+  equipRotation: {x: 0, y: 0, z: 0}
+  equipScale: {x: 1, y: 1, z: 1}
+  throwForce: 3

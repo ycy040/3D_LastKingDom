@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 2514867673226687261}
   - component: {fileID: 7139488854022873765}
   - component: {fileID: -4041927325215068596}
-  m_Layer: 0
+  - component: {fileID: -957347075955418474}
+  - component: {fileID: -7811266899436095675}
+  m_Layer: 8
   m_Name: sword4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8678794878619684989}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -141,3 +143,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-957347075955418474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678794878619684989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cebdeb04e1e7d04eafdcf97efce57cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwordWeapon
+  damage: 30
+  attackRange: 6
+  attackCooldown: 0.4
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 320
+  attackPoint: {fileID: 0}
+--- !u!114 &-7811266899436095675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678794878619684989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35361d4c089a9614fb6d78ec77842efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponPickupData
+  equipPosition: {x: 0, y: 0, z: 0}
+  equipRotation: {x: 180, y: 0, z: 0}
+  equipScale: {x: 1, y: 1, z: 1}
+  throwForce: 3

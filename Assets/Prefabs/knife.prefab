@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 8596295370253286833}
   - component: {fileID: 8234405232320989038}
   - component: {fileID: -8906469629464721217}
-  m_Layer: 0
+  - component: {fileID: -7553610039102970247}
+  - component: {fileID: 5528275329047571696}
+  m_Layer: 8
   m_Name: knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,3 +143,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7553610039102970247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520855812289509304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f77002f260b88428300a018e1ef14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnifeWeapon
+  damage: 20
+  attackRange: 3
+  attackCooldown: 0.3
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 320
+  attackPoint: {fileID: 0}
+--- !u!114 &5528275329047571696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520855812289509304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35361d4c089a9614fb6d78ec77842efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponPickupData
+  equipPosition: {x: 0, y: 0, z: 0}
+  equipRotation: {x: 0, y: 0, z: 0}
+  equipScale: {x: 1, y: 1, z: 1}
+  throwForce: 3
